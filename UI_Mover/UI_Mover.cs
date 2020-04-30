@@ -34,8 +34,10 @@ namespace UI_Mover
             public static Vector3 Dirty;
             public static Vector3 Money;
             public static Vector3 FPS;
+            public static Vector3 Mortal;
         }
         static bool fps = true;
+        static bool mortal = true;
 
         public override void OnLoad()
         {
@@ -57,9 +59,16 @@ namespace UI_Mover
             try
             {
                 originals.FPS = GameObject.Find("FPS").transform.position;
-            } catch (Exception ex)
+            } catch
             {
                 fps = false;
+            }
+            try
+            {
+                originals.Mortal = GameObject.Find("Mortal").transform.position;
+            } catch
+            {
+                mortal = false;
             }
             
         }
@@ -76,6 +85,10 @@ namespace UI_Mover
             if (fps)
             {
                 GameObject.Find("FPS").transform.position = originals.FPS;
+            }
+            if (mortal)
+            {
+                GameObject.Find("Mortal").transform.position = originals.Mortal;
             }
         }
 
@@ -122,6 +135,10 @@ namespace UI_Mover
             if (fps)
             {
                 Move("FPS", true, V);
+            }
+            if (mortal)
+            {
+                Move("Mortal", false, V);
             }
         }
         public override void OnSave()
